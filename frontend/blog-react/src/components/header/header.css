@@ -1,0 +1,33 @@
+::-moz-selection { /* Code for Firefox */
+    color: rgb(255, 255, 255);
+    background: rgb(255, 155, 155);
+}
+
+::selection {
+    color: rgb(255, 255, 255);
+    background: rgb(255, 155, 155);
+}
+
+* {
+    margin:0;
+    padding:0;
+}
+
+.navbar {
+    max-width: 250px;
+    width:95%;
+    height:10vh;
+    display:flex;
+    margin:auto;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+}
+
+.navbar a {
+    font-size:25px;
+    color:black;
+    text-decoration: none;
+    font-weight: 500;
+    padding:10px;
+}
