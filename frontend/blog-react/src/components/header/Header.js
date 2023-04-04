@@ -9,7 +9,7 @@ const Header = () => {
         <div className="navbar" style={styles}>
             <a href="/">Home</a>
 
-            <a href="/">Login</a>
+            <a href="/login">Login</a>
         </div>
     )
 }
