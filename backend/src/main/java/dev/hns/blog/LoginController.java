@@ -22,7 +22,13 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<String> login(@RequestBody Map<String, String> payload) {
         // return new ResponseEntity<>("yo", HttpStatus.OK);
-        return new ResponseEntity<>(service.loginAuthentication(payload.get("username"), payload.get("password")), HttpStatus.OK);
+
+        String token = service.loginAuthentication(payload.get("username"), payload.get("password"));
+        if (token != null) {
+            return ResponseEntity.ok(token);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
     }
 
     @GetMapping("/createpost/test")
