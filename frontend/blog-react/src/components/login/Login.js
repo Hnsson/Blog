@@ -14,9 +14,12 @@ const Login = () => {
             password: password
         }
 
-        const res = await api.post("/api/login", req);
+        await api.post("/api/login", req)
+            .then((data) => {
+                localStorage.setItem('jwt_token', data.data);
+            })
+            .catch((err) => {console.log("401 - Unathorized");});
 
-        console.log(res)
     }
 
     return(
