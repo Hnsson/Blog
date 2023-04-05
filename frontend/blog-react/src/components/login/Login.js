@@ -19,7 +19,6 @@ const Login = () => {
                 localStorage.setItem('jwt_token', data.data);
             })
             .catch((err) => {console.log("401 - Unathorized");});
-
     }
 
     return(
