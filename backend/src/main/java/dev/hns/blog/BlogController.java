@@ -12,7 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,8 +53,7 @@ public class BlogController {
         if(JwtAuthentication.validateToken(payload.get("Authorization"))) {
             System.out.println("VALIDATED");
 
-            List<String> categories = new ArrayList<String>();
-            categories.add(payload.get("categories"));
+            List<String> categories = Arrays.asList(payload.get("categories").split(","));
 
             service.createBlogPost(payload.get("title"), payload.get("author"), payload.get("content"), "", categories);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Post created");
