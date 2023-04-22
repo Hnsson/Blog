@@ -10,14 +10,21 @@ const Create = ({ getPostData, post, comments, setComments }) => {
     const [author, setAuthor] = useState("");
     const [content, setContent] = useState("");
     const [categories, setCategories] = useState("");
+    const [selectedItem, setSelectedItem] = useState("");
+    const [selectedItems, setSelectedItems] = useState([]);
 
     const sendCreateRequest = async (e) => {
+        e.preventDefault();
+        console.log(selectedItems)
+        
+
+
         console.log("Sending login request...");
         const req = {
             title: title,
             author: author,
             content: content,
-            categories: categories,
+            categories: selectedItems.join(","),
             Authorization: localStorage.getItem('jwt_token')
         }
 
@@ -25,7 +32,13 @@ const Create = ({ getPostData, post, comments, setComments }) => {
             .then((data) => {
                 console.log(data)
             })
-            .catch((err) => {console.log("401 - Unathorized");});
+            .catch((err) => {console.log("Could not create post!");});
+    }
+
+    const handleSelect = (e) => {
+        const value = e.target.value;
+        setSelectedItems([...selectedItems, value]);
+        console.log(value);
     }
 
     return(
@@ -43,8 +56,18 @@ const Create = ({ getPostData, post, comments, setComments }) => {
                 <textarea id="content" value={content} onChange={(e) => setContent(e.target.value)}></textarea>
             </div>
             <div>
-                <label htmlFor="categories">Categories:</label>
-                <input type="text" id="categories" value={categories} onChange={(e) => setCategories(e.target.value)}/>
+                {selectedItems.map((item, index) => {
+                    <li key={index}>{item}</li>
+                })}
+                {/* <label htmlFor="categories">Categories:</label> */}
+                {/* <input type="text" id="categories" value={categories} onChange={(e) => setCategories(e.target.value)}/> */}
+                <select value={selectedItem} onChange={handleSelect}>
+                    <option value="">Select a category to add</option>
+                    <option value="tech">tech</option>
+                    <option value="life">life</option>
+                    <option value="internet">internet</option>
+                    <option value="tutorial">tutorial</option>
+                </select>
             </div>
             <div>
                 <button id="submit" type="submit" onClick={sendCreateRequest}>Login</button>
