@@ -37,28 +37,26 @@ const Create = ({ getPostData, post, comments, setComments }) => {
 
     const handleSelect = (e) => {
         const value = e.target.value;
-        setSelectedItems([...selectedItems, value]);
-        console.log(value);
+        if(!selectedItems.includes(value)) {
+            setSelectedItems([...selectedItems, value]);
+        }
     }
 
     return(
-        <div className="posts" style={styles}>
-            <div>
+        <div className="create-posts" style={styles}>
+            <div className="create-title">
                 <label htmlFor="title">Title:</label>
-                <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <input maxLength="30" type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
             </div>
-            <div>
+            <div className="create-author">
                 <label htmlFor="author">Author:</label>
-                <input type="text" id="author" value={author} onChange={(e) => setAuthor(e.target.value)}/>
+                <input maxLength="30" type="text" id="author" value={author} onChange={(e) => setAuthor(e.target.value)}/>
             </div>
-            <div>
+            <div className="create-content">
                 <label htmlFor="content">Content:</label>
                 <textarea id="content" value={content} onChange={(e) => setContent(e.target.value)}></textarea>
             </div>
-            <div>
-                {selectedItems.map((item, index) => {
-                    <li key={index}>{item}</li>
-                })}
+            <div className="create-category">
                 {/* <label htmlFor="categories">Categories:</label> */}
                 {/* <input type="text" id="categories" value={categories} onChange={(e) => setCategories(e.target.value)}/> */}
                 <select value={selectedItem} onChange={handleSelect}>
@@ -68,9 +66,15 @@ const Create = ({ getPostData, post, comments, setComments }) => {
                     <option value="internet">internet</option>
                     <option value="tutorial">tutorial</option>
                 </select>
+                <ul>
+                    <p>Current categories:</p>
+                    {selectedItems.map((item, index) => (
+                        <li key={index}>{item}</li>
+                    ))}
+                </ul>
             </div>
-            <div>
-                <button id="submit" type="submit" onClick={sendCreateRequest}>Login</button>
+            <div className="create-submit">
+                <button id="submit" type="submit" onClick={sendCreateRequest}>Create</button>
             </div>
         </div>
     )

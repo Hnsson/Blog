@@ -5,9 +5,9 @@ const Home = ({posts}) => {
     return(
         <div className="posts" style={styles}>
             {
-                posts?.map((post) => {
+                posts?.map((post, index) => {
                     return(
-                        <div key={post.id} className="post">
+                        <div key={index} className="post">
                             <span className="post-header">
                                 <h1>{post.title}</h1>
                                 <span className="post-header-data">
@@ -21,9 +21,9 @@ const Home = ({posts}) => {
                             <span className="post-footer">
                                 <span className="post-categories">
                                     {
-                                        post.categories?.map((category) => {
+                                        post.categories?.map((category, index) => {
                                             return (
-                                                <p>{category}</p>
+                                                <p key={index}>{category}</p>
                                             )
                                         })
                                     }

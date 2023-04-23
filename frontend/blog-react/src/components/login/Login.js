@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './login.css'
 import { useState } from 'react';
 import api from '../../api/axiosConfig';
+import { redirect } from "react-router-dom";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -17,12 +18,13 @@ const Login = () => {
         await api.post("/api/login", req)
             .then((data) => {
                 localStorage.setItem('jwt_token', data.data);
+                window.location.href = "/";
             })
             .catch((err) => {console.log("401 - Unathorized");});
     }
 
     return(
-        <div className="posts" style={styles}>
+        <div className="login" style={styles}>
             <div>
                 <label htmlFor="username">Username</label>
                 <input type="email" id="username" value={username} onChange={(e) => setUsername(e.target.value)}/>

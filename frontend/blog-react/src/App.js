@@ -30,7 +30,6 @@ function App() {
       const singlePost = res.data;
 
       setPost(singlePost);
-      console.log(singlePost.comments);
       setComments(singlePost.comments);
     } catch (err) { console.log(err) }
   }
